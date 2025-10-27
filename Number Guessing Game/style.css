@@ -1,95 +1,293 @@
+/* CSS Variables and Themes */
+:root {
+  --bg-primary: #212121;
+  --bg-secondary: #1f2a36;
+  --bg-header: #274c77;
+  --bg-button: #141414;
+  --bg-button-submit: #161616;
+  --bg-guesses: #2a2a2a;
+  --bg-new-button: #6bb2f8;
+  --text-primary: #e7ecef;
+  --text-input: #e7ecef;
+  --border-color: #3c3c3c;
+  --input-bg: #111;
+  --accent: #00d4ff;
+  --accent-2: #7c4dff;
+  --shadow-color: 0 10px 30px rgba(0,0,0,0.35);
+}
+
+.light-theme {
+  --bg-primary: #f5f7fb;
+  --bg-secondary: #ffffff;
+  --bg-header: #90caf9;
+  --bg-button: #1976d2;
+  --bg-button-submit: #1565c0;
+  --bg-guesses: #e8f0fe;
+  --bg-new-button: #42a5f5;
+  --text-primary: #1c1e21;
+  --text-input: #1c1e21;
+  --border-color: #d0d7de;
+  --input-bg: #fff;
+  --accent: #005eff;
+  --accent-2: #7c4dff;
+  --shadow-color: 0 12px 28px rgba(0,0,0,0.15);
+}
+
+/* Layout */
+html, body {
+  height: 100%;
+}
+
 body {
-  /* width: 300px;
-  max-width: 750px;
-  min-width: 480px; */
-  font-family: sans-serif;
-  margin: 0 auto;
-  background-color: #212121;
-  color: #e7ecef;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  margin: 0;
+  background: radial-gradient(1200px 800px at 10% 10%, rgba(124,77,255,0.15), transparent),
+              radial-gradient(1200px 800px at 90% 90%, rgba(0,212,255,0.12), transparent),
+              var(--bg-primary);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease, background 0.6s ease;
+  display: grid;
+  place-items: center;
+  perspective: 1200px;
+  overflow-x: hidden;
 }
+
 .lastResult {
-  /* color: white; */
   padding: 7px;
 }
-.guesses {
-  /* color: white; */
-  padding: 7px;
-}
-button {
-  background-color: #141414;
-  color: #fff;
-  width: 300px;
-  height: 50px;
-  border-radius: 25px;
-  font-size: 30px;
-  border-style: none;
-  margin-top: 30px;
-  /* margin-left: 50px; */
-}
-#subt {
-  background-color: #161616;
-  /* color: #ffffff; */
-  width: 200px;
-  height: 50px;
-  border-radius: 10px;
-  font-size: 20px;
-  border-style: none;
-  margin-top: 50px;
-  /* margin-left: 75px; */
-}
-#guessField {
-  color: #000;
-  width: 30%;
-  height: 50px;
-  font-size: 30px;
-  /* border-style: none; */
-  margin-top: 25px;
-  /* margin-left: 50px; */
-  border: 5px solid #7a7a7a;
-  border-radius: 20px;
-  text-align: center;
-}
-#guess {
-  font-size: 55px;
-  /* margin-left: 90px; */
-  margin-top: 120px;
-  /* color: #fff; */
-}
-.guesses {
-  background-color: #7a7a7a;
-}
+
+/* 3D Card */
 #wrapper {
-  /* box-sizing: border-box; */
-  text-align: center;
-  width: 70%;
-  height: 600px;
-  margin: 50px auto;
-  background-color: #6096ba;
-  /* color: #fff; */
-  font-size: 25px;
+  width: min(720px, 92%);
+  min-height: 560px;
+  margin: 48px auto;
+  background: linear-gradient(180deg, var(--bg-secondary), color-mix(in srgb, var(--bg-secondary) 80%, #000 20%));
+  border-radius: 24px;
+  position: relative;
+  box-shadow: var(--shadow-color);
+  transform-style: preserve-3d;
+  transform: rotateX(0deg) rotateY(0deg) translateZ(0);
+  transition: transform 0.6s cubic-bezier(.2,.8,.2,1), box-shadow 0.4s ease, background 0.6s ease;
+  animation: cardIn 600ms ease-out both;
 }
+
+#wrapper::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: 24px;
+  padding: 1px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  pointer-events: none;
+  opacity: .25;
+}
+
+#wrapper:hover {
+  transform: rotateX(6deg) rotateY(-6deg) translateZ(8px);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.45);
+}
+
+/* Header */
+.header {
+  background: linear-gradient(180deg, var(--bg-header), color-mix(in srgb, var(--bg-header) 80%, #000 20%));
+  padding: 24px 28px;
+  border-top-left-radius: 24px;
+  border-top-right-radius: 24px;
+  transform: translateZ(30px);
+}
+
 h1 {
-  /* color: #fff; */
-  text-align: center;
-  margin: 0px;
+  margin: 0;
+  letter-spacing: 0.5px;
+  font-weight: 800;
+  line-height: 1.2;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 1px 0 rgba(0,0,0,0.15);
 }
+
 p {
-  font-size: 20px;
+  font-size: 18px;
   font-style: italic;
   text-align: center;
+  margin: 12px 16px;
+  opacity: .95;
+  transform: translateZ(25px);
+  animation: fadeIn 700ms ease both;
 }
-.header{
-  background-color: #274c77;
-  padding: 20px;
+
+/* Inputs */
+label {
+  color: var(--text-primary);
 }
-@media(max-width: 680px)
-{
-  #wrapper{
-    overflow: scroll;
+
+#guessField {
+  color: var(--text-input);
+  background-color: var(--input-bg);
+  width: clamp(220px, 40%, 320px);
+  height: 52px;
+  font-size: 24px;
+  margin-top: 20px;
+  border: 2px solid var(--border-color);
+  border-radius: 14px;
+  text-align: center;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.15s ease;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.15);
+  transform: translateZ(20px);
+}
+
+#guessField:focus {
+  outline: none;
+  border-color: color-mix(in srgb, var(--accent) 70%, white 30%);
+  box-shadow: 0 0 0 6px color-mix(in srgb, var(--accent) 20%, transparent 80%), inset 0 1px 2px rgba(0,0,0,0.2);
+}
+
+#guess {
+  font-size: 48px;
+  margin-top: 72px;
+}
+
+.guesses {
+  background: color-mix(in srgb, var(--bg-guesses) 90%, #000 10%);
+  padding: 8px 10px;
+  border-radius: 10px;
+  display: inline-block;
+  margin-top: 6px;
+  transform: translateZ(18px);
+  transition: background 0.3s ease;
+}
+
+.resultParas {
+  transform: translateZ(22px);
+}
+
+/* Buttons */
+button {
+  background: linear-gradient(180deg, color-mix(in srgb, var(--bg-button) 85%, #000 15%), var(--bg-button));
+  color: #fff;
+  width: 280px;
+  height: 52px;
+  border-radius: 14px;
+  font-size: 20px;
+  border: 0;
+  margin-top: 24px;
+  transition: transform 0.15s ease, box-shadow 0.25s ease, background 0.3s ease;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+  transform: translateZ(26px);
+}
+
+button:hover {
+  transform: translateY(-2px) translateZ(26px);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.45);
+}
+
+button:active {
+  transform: translateY(1px) translateZ(26px) scale(0.99);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.35);
+}
+
+.theme-toggle {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: auto;
+  height: 40px;
+  padding: 0 16px;
+  font-size: 14px;
+  border-radius: 20px;
+}
+
+#subt {
+  background: linear-gradient(180deg, color-mix(in srgb, var(--bg-button-submit) 85%, #000 15%), var(--bg-button-submit));
+  width: 200px;
+  height: 48px;
+  border-radius: 12px;
+  font-size: 18px;
+  margin-top: 28px;
+}
+
+#new {
+  background: linear-gradient(180deg, color-mix(in srgb, var(--bg-new-button) 85%, #000 15%), var(--bg-new-button));
+  border: 2px solid color-mix(in srgb, var(--bg-new-button) 70%, #000 30%);
+  margin-top: 8px;
+}
+
+/* Media */
+@media(max-width: 680px) {
+  #wrapper {
+    min-height: 520px;
+    width: 92%;
+    margin: 24px auto;
+  }
+  button {
+    width: 90%;
   }
 }
-#new{
-  background-color: #6bb2f8;
-  border: 2px solid black;
-  margin-top: 0;
+
+/* Animations */
+@keyframes cardIn {
+  from {
+    opacity: 0;
+    transform: rotateX(10deg) rotateY(-10deg) translateZ(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: rotateX(0) rotateY(0) translateZ(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Center and animate Submit Guess button */
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+#btn {
+  display: block;
+  margin: 24px auto 0;
+  width: 280px;
+  height: 52px;
+  position: relative;
+  overflow: hidden;
+}
+
+#btn::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 120%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.18), transparent);
+  transform: skewX(-20deg);
+}
+
+#btn:hover::after {
+  animation: sheen 900ms ease;
+}
+
+@keyframes sheen {
+  from { left: -120%; }
+  to { left: 120%; }
+}
+
+#btn:hover {
+  transform: translateY(-2px) translateZ(26px);
+}
+
+#btn:active {
+  transform: translateY(1px) translateZ(26px) scale(0.99);
 }

@@ -15,6 +15,22 @@ newGame.style.display = "none";
 
 count.innerText = noOfGuesses;
 
+// Theme Toggle Functionality
+const themeToggle = document.querySelector("#themeToggle");
+const body = document.body;
+
+// Check for saved theme preference or default to dark mode
+const currentTheme = localStorage.getItem("theme") || "dark";
+body.classList.toggle("light-theme", currentTheme === "light");
+themeToggle.textContent = currentTheme === "light" ? "🌙 Dark Mode" : "☀️ Light Mode";
+
+themeToggle.addEventListener("click", () => {
+    body.classList.toggle("light-theme");
+    const isLight = body.classList.contains("light-theme");
+    themeToggle.textContent = isLight ? "🌙 Dark Mode" : "☀️ Light Mode";
+    localStorage.setItem("theme", isLight ? "light" : "dark");
+});
+
 btn.addEventListener("click", (e) => {
     e.preventDefault();
     let suggestion = input.value;
